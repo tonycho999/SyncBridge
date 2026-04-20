@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncBridge - 프리미엄 B2B 옴니채널 솔루션</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div id="login-screen" class="screen hidden">
+        <div class="card login-card">
+            <h1 id="login-company-name">SyncBridge</h1>
+            <p>전용 시스템에 접속하기 위해 비밀번호를 입력해주세요.</p>
+            <input type="password" id="company-password" placeholder="비밀번호 입력">
+            <button onclick="loginCompany()">접속하기</button>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="screen hidden layout-flex">
+        <aside class="sidebar">
+            <h2>SyncBridge</h2>
+            <div class="company-badge" id="dash-company-name">회사명</div>
+            <ul id="dynamic-menu">
+                </ul>
+        </aside>
+        <main class="content">
+            <header>
+                <h3>실시간 재고 및 매출 현황</h3>
+                <button onclick="logout()">로그아웃</button>
+            </header>
+            <div id="dashboard-content" class="dashboard-grid">
+                </div>
+        </main>
+    </div>
+
+    <div id="master-screen" class="screen hidden">
+        <div class="card master-card">
+            <h2>⚙️ SyncBridge 마스터 관리자</h2>
+            <p>신규 가입 업체를 세팅하고 활성 쇼핑몰을 지정합니다.</p>
+            
+            <div class="form-group">
+                <label>업체명 (예: 대한통상)</label>
+                <input type="text" id="new-company-name">
+            </div>
+            <div class="form-group">
+                <label>접속 URL 슬러그 (예: daehan)</label>
+                <input type="text" id="new-company-slug">
+            </div>
+            <div class="form-group">
+                <label>초기 비밀번호</label>
+                <input type="password" id="new-company-pwd">
+            </div>
+
+            <hr>
+            <h3>쇼핑몰 API 키 입력 (입력된 몰만 활성화됨)</h3>
+            <div class="api-inputs">
+                <input type="text" id="api-naver" placeholder="네이버 스마트스토어 API 키">
+                <input type="text" id="api-coupang" placeholder="쿠팡 Wing API 키">
+                <input type="text" id="api-qoo10" placeholder="큐텐 재팬 API 키">
+                <input type="text" id="api-shopee" placeholder="쇼피(Shopee) API 키">
+                <input type="text" id="api-lazada" placeholder="라자다(Lazada) API 키">
+            </div>
+            
+            <button class="btn-primary" onclick="setupNewCompany()">신규 업체 세팅 완료</button>
+            <div id="master-log"></div>
+        </div>
+    </div>
+
+    <script>
+        // Supabase 초기화 (대표님의 실제 프로젝트 키로 변경 필요)
+        const supabaseUrl = 'https://YOUR_PROJECT_ID.supabase.co';
+        const supabaseKey = 'YOUR_ANON_KEY';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 라우팅 로직 (URL 분석)
+        window.onload = () => {
+            const path = window.location.pathname.replace('/', '');
+            
+            if (path === 'master') {
+                // 대표님 전용 페이지
+                document.getElementById('master-screen').classList.remove('hidden');
+            } else if (path !== '') {
+                // 업체 전용 URL로 접속한 경우 (예: /daehan)
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('login-company-name').innerText = path.toUpperCase() + " 전용 시스템";
+                // 글로벌 변수로 현재 슬러그 저장
+                window.currentSlug = path;
+            } else {
+                // 루트 접속 시 안내 문구
+                document.body.innerHTML = "<h2 style='text-align:center; margin-top:20%;'>SyncBridge 전용 URL로 접속해주세요.</h2>";
+            }
+        };
+    </script>
+    <script src="dashboard.js"></script>
+    <script src="master.js"></script>
+</body>
+</html>
