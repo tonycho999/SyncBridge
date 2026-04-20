@@ -1,0 +1,132 @@
+:root {
+    --primary-color: #1a365d;
+    --accent-color: #2b6cb0;
+    --bg-color: #f7fafc;
+    --card-bg: #ffffff;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+}
+
+body {
+    margin: 0;
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+.hidden { display: none !important; }
+
+/* 레이아웃 */
+.layout-flex {
+    display: flex;
+    height: 100vh;
+}
+
+.screen {
+    width: 100%;
+    height: 100vh;
+}
+
+/* 카드 및 폼 디자인 */
+.card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.login-card {
+    max-width: 400px;
+    margin: 10% auto;
+    text-align: center;
+}
+
+.master-card {
+    max-width: 600px;
+    margin: 5% auto;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+button:hover { background-color: var(--accent-color); }
+
+/* 대시보드 디자인 */
+.sidebar {
+    width: 250px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+}
+
+.company-badge {
+    background: rgba(255,255,255,0.1);
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    font-size: 0.9em;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    cursor: pointer;
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.content header button { width: auto; padding: 8px 16px; }
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.widget {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    border: 1px solid #e2e8f0;
+}
+
+.api-inputs input { margin-bottom: 10px; }
